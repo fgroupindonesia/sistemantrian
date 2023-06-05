@@ -1,5 +1,4 @@
-git remote -v
-git remote set-url git@github.com:fgroupindonesia/sistemantrian.git
+git remote add origin git@github.com:fgroupindonesia/sistemantrian.git
 git push
 git add .
 git commit -m "first commit"
