@@ -1,0 +1,22 @@
+Poli Urologi
+Poli Anak
+Poli Bedah Anak
+Poli Bedah Digestif
+Poli Bedah Plastik
+Poli Bedah Syaraf
+Poli Bedah Umum
+Poli Gigi dan Mulut
+Poli Jantung
+Poli Kebidanan
+Poli Obgyn
+Poli Kulit dan Kelamin
+Poli Mata
+Poli Orthopedi
+Poli Paru
+Poli Penyakit Dalam
+Poli THT
+Poli Bedah Onkologi
+Poli Anestesi
+Poli Bedah Thoraks
+Poli Syaraf
+Poli Okupasi

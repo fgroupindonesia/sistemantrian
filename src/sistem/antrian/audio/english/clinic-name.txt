@@ -1,0 +1,22 @@
+Urology clinic
+Children's clinic
+Pediatric Surgery clinic
+Digestive Surgery clinic
+Plastic Surgery clinic
+Neurosurgery clinic
+General Surgery clinic
+Dental and Oral clinic
+Heart clinic
+Obstetrics clinic
+Obgyn clinic
+Skin and Genital Clinic
+Eye clinic
+Orthopedic clinic
+Pulmonary clinic
+Internal Medicine clinic
+ENT clinic
+Surgical Oncology clinic
+Anesthesia clinic
+Thoracic Surgery clinic
+Nerve clinic
+Occupational clinic
