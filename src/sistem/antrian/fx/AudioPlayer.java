@@ -4,35 +4,51 @@ import jaco.mp3.player.MP3Player;
 import java.io.File;
 
 /**
+ * Class AudioPlayer : used for playing audio by specific language
  *
- * @author staff
+ * @author fgroupindonesia
  */
 public class AudioPlayer {
 
-    public enum language {
+    public enum Language {
         BAHASA, ENGLISH
     };
 
-    private language userLanguage;
+    private Language userLanguage;
 
-    public AudioPlayer(language chosen) {
+    public AudioPlayer(Language chosen) {
         userLanguage = chosen;
     }
 
-    public void play(int num) {
+    public void play(int num, String alphabet, String namaPoli) {
 
         try {
             String dir = this.getClass().getResource("/sistem/antrian/audio/").getPath();
-
-            if (userLanguage == language.BAHASA) {
+            String queue; 
+            
+            if (userLanguage == Language.BAHASA) {
                 dir += "indonesia/";
+                queue = "nomor-antrian";
             } else {
                 dir += "english/";
+                queue = "queue-number";
             }
 
-            String filename = dir + num + ".mp3";
-            filename = filename.replaceAll("%20", " ");
-            File f = new File(filename);
+            String filenameNumeric = dir + num + ".mp3";
+            filenameNumeric = filenameNumeric.replaceAll("%20", " ");
+            File fNumeric = new File(filenameNumeric);
+
+            String filenamePoly = dir + namaPoli.replaceAll(" ", "-") + ".mp3";
+            filenamePoly = filenamePoly.replaceAll("%20", " ");
+            File fPoly = new File(filenamePoly);
+
+            String filenameQueue = dir + queue + ".mp3";
+            filenameQueue = filenameQueue.replaceAll("%20", " ");
+            File fQueueText = new File(filenameQueue);
+
+            String filenameAlphabet = dir + alphabet + ".mp3";
+            filenameAlphabet = filenameAlphabet.replaceAll("%20", " ");
+            File fAlphabet = new File(filenameAlphabet);
 
             //System.out.println(f.getAbsolutePath());
             /*if(f.exists()){
@@ -40,16 +56,18 @@ public class AudioPlayer {
             }else{
             System.out.println("No");
             }*/
-            new MP3Player(f).play();
-            Thread.sleep(3000);
+            new MP3Player(fPoly).play();
+            Thread.sleep(2500);
+            new MP3Player(fQueueText).play();
+            Thread.sleep(2500);
+            new MP3Player(fAlphabet).play();
+            Thread.sleep(1500);
+            new MP3Player(fNumeric).play();
+            Thread.sleep(2000);
         } catch (Exception ex) {
-
+            System.out.println("Error at play() " + ex.getMessage());
+            ex.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        AudioPlayer ap = new AudioPlayer(AudioPlayer.language.BAHASA);
-        ap.play(9);
     }
 
 }

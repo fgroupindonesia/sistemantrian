@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 
 /**
- *
- * @author staff
+ * Class MarqueeFX : used for displaying text effect
+ * @author fgroupindonesia
  */
 public class MarqueeFX implements ActionListener {
 

@@ -1,20 +1,39 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package sistem.antrian.frames;
 
+import sistem.antrian.config.Activator;
+import sistem.antrian.config.Keys;
+import sistem.antrian.fx.Iconifier;
+
 /**
+ * Class ServeMainFramerFrame : used for first running the app
  *
- * @author staff
+ * @author fgroupindonesia
  */
 public class MainFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form MainFrame
      */
+    Activator act = new Activator(this);
+
     public MainFrame() {
         initComponents();
+        
+         new Iconifier(this);
+         
+        if (!act.isActivated()) {
+            lockButtons(true);
+        } else {
+            lockButtons(false);
+        }
+    }
+
+    public void lockButtons(boolean b) {
+        
+            buttonAktifasi.setEnabled(b);
+            buttonLoket.setEnabled(!b);
+            buttonServer.setEnabled(!b);
+        
     }
 
     /**
@@ -29,30 +48,60 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         buttonServer = new javax.swing.JButton();
         buttonLoket = new javax.swing.JButton();
-        checkboxApplyMode = new javax.swing.JCheckBox();
+        buttonAktifasi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Sistem Antrian");
+        setTitle("Sistem Antrian - MAIN FRAME");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Aktifkan Sebagai"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("JALANKAN PROGRAM"));
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 20));
 
+        buttonServer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        buttonServer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistem/antrian/images/server.png"))); // NOI18N
         buttonServer.setText("Server");
+        buttonServer.setEnabled(false);
+        buttonServer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonServer.setPreferredSize(new java.awt.Dimension(200, 100));
+        buttonServer.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jPanel1.add(buttonServer);
 
+        buttonLoket.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        buttonLoket.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistem/antrian/images/client.png"))); // NOI18N
         buttonLoket.setText("Loket");
+        buttonLoket.setEnabled(false);
+        buttonLoket.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonLoket.setPreferredSize(new java.awt.Dimension(200, 100));
+        buttonLoket.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jPanel1.add(buttonLoket);
 
-        checkboxApplyMode.setText("Terapkan selalu mode ini");
-        jPanel1.add(checkboxApplyMode);
+        buttonAktifasi.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        buttonAktifasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistem/antrian/images/key.png"))); // NOI18N
+        buttonAktifasi.setText("Aktifasi");
+        buttonAktifasi.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonAktifasi.setPreferredSize(new java.awt.Dimension(200, 100));
+        buttonAktifasi.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonAktifasi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAktifasiActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buttonAktifasi);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonAktifasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAktifasiActionPerformed
+
+        if (act.isActivated()) {
+            act.message(Keys.Notification.SUCCESS);
+        } else {
+            act.request();
+        }
+
+    }//GEN-LAST:event_buttonAktifasiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -90,9 +139,9 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonAktifasi;
     private javax.swing.JButton buttonLoket;
     private javax.swing.JButton buttonServer;
-    private javax.swing.JCheckBox checkboxApplyMode;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
