@@ -60,8 +60,8 @@ public class ClientFrame extends javax.swing.JFrame {
 
     public ClientFrame() {
         initComponents();
-        
-         new Iconifier(this);
+
+        new Iconifier(this);
 
         card = (CardLayout) panelMain.getLayout();
         textfield_ipServer.setText(db.getString(Keys.IP_SERVER));
@@ -235,8 +235,9 @@ public class ClientFrame extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         buttonBack = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sistem Antrian - LOKET");
+        setType(java.awt.Window.Type.UTILITY);
 
         panelHeader.setBackground(new java.awt.Color(0, 255, 0));
         panelHeader.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
@@ -516,8 +517,25 @@ public class ClientFrame extends javax.swing.JFrame {
 
         // update the local no
         labelNoAntrian.setText(antrian.asTicket());
+        labelPoliName.setText(chosenPoly);
 
     }//GEN-LAST:event_buttonNextActionPerformed
+
+    public void eliminateAlphabets(String data[]) {
+
+        if (data != null) {
+            for (String huruf : data) {
+                comboboxAlphabet.removeItem(huruf);
+            }
+
+            comboboxAlphabet.setSelectedIndex(0);
+            chosenAlphabet = comboboxAlphabet.getSelectedItem().toString();
+            saveSettings();
+
+        }
+
+    }
+
 
     private void textfield_ipServerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textfield_ipServerKeyReleased
         saveSettings();

@@ -1,7 +1,7 @@
-#Thu Jun 29 12:04:28 ICT 2023
-port_destination_server=6646
-poly_name=Poli Paru
-client_mode=istirahat
+#Sat Jul 01 21:54:21 ICT 2023
+port_destination_server=6657
+poly_name=Poli Anak
+client_mode=Istirahat
 audio_operator=bahasa indonesia
 alphabet=B
 ip_server=127.0.0.1

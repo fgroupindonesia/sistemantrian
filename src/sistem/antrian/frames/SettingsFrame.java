@@ -154,8 +154,9 @@ public class SettingsFrame extends javax.swing.JFrame {
         label_backgroundPreviewBrowse = new javax.swing.JLabel();
         label_resetBackground = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sistem Antrian - SETTINGS");
+        setPreferredSize(new java.awt.Dimension(800, 450));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("SETTING APLIKASI"));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

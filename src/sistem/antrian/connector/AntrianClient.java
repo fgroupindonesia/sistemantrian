@@ -67,6 +67,7 @@ public class AntrianClient implements Runnable {
             // lets read a message of json from server
             DataCache dcache = gson.fromJson(dataObtained, DataCache.class);
 
+            cframe.eliminateAlphabets(dcache.getUsedAlphabet());
             cframe.setCompanyName(dcache.getCompanyName());
 
             numberFromServer = dcache.getClientNumberOrder();

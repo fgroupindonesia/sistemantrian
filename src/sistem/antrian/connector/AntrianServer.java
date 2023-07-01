@@ -11,8 +11,8 @@ import sistem.antrian.frames.ServerFrame;
 import sistem.antrian.fx.AudioPlayer;
 
 /**
- * Class AntrianServer : used for receiving throught out socket to execute
- * command locally
+ * Class AntrianServer : used for receiving throughout socket to execute command
+ * locally
  *
  * @author fgroupindonesia
  */
@@ -73,13 +73,19 @@ public class AntrianServer implements Runnable {
 
                     // set the audio
                     svFrame.setAudio(obj.getLanguage());
+                    
+                    // then grab the alphabets from local data
+                    String alphabets [] = getUsedAlphabet();
 
-                    String msg = gson.toJson(new DataCache(companyName, currentPost));
+                    String msg = gson.toJson(new DataCache(companyName, currentPost, alphabets));
 
                     dos.writeUTF(msg);
                     printout("sending " + msg);
 
                 } else {
+                    // save the data locally
+                    updateAntrianDataLocally(obj);
+
                     svFrame.updateAntrian(obj);
                 }
             }
@@ -87,9 +93,92 @@ public class AntrianServer implements Runnable {
             ss.close();
             printout("closing...");
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println(e);
+            turnOff(true);
+            System.out.println("Error at 95.");
         }
 
+    }
+
+    private String[] getUsedAlphabet() {
+        // this will read from local data
+
+        String temp = db.getString(Keys.QUEUE_LIST);
+        String allAlphabets[] = null;
+        Antrian dataTemp[] = new Gson().fromJson(temp, Antrian[].class);
+
+        if (dataTemp != null) {
+            allAlphabets = new String[dataTemp.length];
+
+            int i = 0;
+            for (Antrian an : dataTemp) {
+                allAlphabets[i] = an.getAlphabet();
+                i++;
+            }
+
+        }
+
+        return allAlphabets;
+
+    }
+
+    private void updateAntrianDataLocally(Antrian antri) {
+        Antrian antrianList[] = null;
+        Antrian antrianBaru[] = null;
+
+        String temp = db.getString(Keys.QUEUE_LIST);
+        if (temp != null) {
+            antrianList = new Gson().fromJson(temp, Antrian[].class);
+            antrianBaru = addCopyData(antrianList, antri);
+
+        } else {
+            antrianBaru = new Antrian[1];
+            antrianBaru[0] = antri;
+        }
+
+        String data = new Gson().toJson(antrianBaru);
+        db.set(Keys.QUEUE_LIST, data);
+
+    }
+
+    private Antrian[] addCopyData(Antrian firstList[], Antrian antriBaru) {
+        Antrian[] newList = null;
+
+        int foundPost = 0;
+        boolean duplicate = false;
+        for (Antrian n : firstList) {
+            if (antriBaru.getLoket().equals(n.getLoket())) {
+                duplicate = true;
+                break;
+            }
+            foundPost++;
+
+        }
+
+        if (duplicate == false) {
+            newList = new Antrian[firstList.length + 1];
+            newList = copy(firstList, newList);
+            // lastly
+            newList[firstList.length] = antriBaru;
+
+        } else {
+            newList = new Antrian[firstList.length];
+            newList = copy(firstList, newList);
+            newList[foundPost].setNumber(antriBaru.getNumber());
+        }
+
+        return newList;
+    }
+
+    private Antrian[] copy(Antrian f[], Antrian s[]) {
+        int i = 0;
+        for (Antrian fx : f) {
+            s[i] = fx;
+            i++;
+        }
+
+        return s;
     }
 
     boolean keepWork = true;

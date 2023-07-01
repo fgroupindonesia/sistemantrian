@@ -17,7 +17,13 @@ public class DB {
     Properties prop = new Properties();
 
     public boolean isRegistered() {
-        return false;
+
+        if (this.getString(Keys.ACTIVATION_CODE) == null) {
+            return false;
+        }
+
+        return true;
+
     }
 
     private void scrambled() {

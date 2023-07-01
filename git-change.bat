@@ -1,5 +1,4 @@
-git remote add origin git@github.com:fgroupindonesia/sistemantrian.git
-git push
 git add .
-git commit -m "upload new version v1.1"
+git commit -m "adding new feature : printing POS Thermal Printer."
 git push -u origin main
+git push https://github.com/fgroupindonesia/sistemantrian.git --force

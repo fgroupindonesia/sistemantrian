@@ -302,9 +302,10 @@ public class ServerFrame extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         labelNewsMode3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sistem Antrian - SERVER");
         setPreferredSize(new java.awt.Dimension(500, 500));
+        setType(java.awt.Window.Type.UTILITY);
 
         panelHeader.setBackground(new java.awt.Color(102, 255, 51));
         panelHeader.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));

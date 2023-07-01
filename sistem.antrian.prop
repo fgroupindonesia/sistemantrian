@@ -1,8 +1,10 @@
-#Thu Jun 29 15:20:49 ICT 2023
+#Sat Jul 01 21:54:24 ICT 2023
 autoruns_windows=true
 company_logo=C\:\\Users\\staff\\Pictures\\fg-logo.jpg
-display_mode=3 Display Vertical
+display_mode=1 Display Horizontal
+activation_code=TR12-RRRR-DDDD-1234
+queue_list=[{"firstTime"\:false,"clientNumberOrder"\:0,"loket"\:"Poli Jantung","alphabet"\:"A","number"\:4},{"firstTime"\:false,"clientNumberOrder"\:1,"loket"\:"Poli Anak","alphabet"\:"B","number"\:1}]
 background=C\:\\Users\\staff\\Pictures\\logo -rth.jpg
-company_name=rumah sehat selalu
+company_name=Rumah Sehat Sakit Boleh
 running_text=undian berhadiah broo makanlah dengan membaca bismillah karena itu akan menyelamatkanmu dari kerusakan yang berlanjut dari waktu ke waktu karena sudah begitulah sunnatullah yang ditetapkan.
-port_server=6646
+port_server=6657

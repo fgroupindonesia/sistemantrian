@@ -1,5 +1,7 @@
 package sistem.antrian.frames;
 
+import java.awt.CardLayout;
+import java.awt.event.InputEvent;
 import sistem.antrian.config.Activator;
 import sistem.antrian.config.Keys;
 import sistem.antrian.fx.Iconifier;
@@ -15,24 +17,39 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     Activator act = new Activator(this);
-
+    CardLayout cardAktifasi = null;
+    
+    private void hideCheckboxInternet(boolean b) {
+        if (b) {
+            cardAktifasi.show(panelAktifasi, "buttonAktifasi");
+        } else {
+            cardAktifasi.show(panelAktifasi, "checkboxNoInternet");
+            
+        }
+    }
+    
     public MainFrame() {
         initComponents();
+
         
-         new Iconifier(this);
-         
+        cardAktifasi = (CardLayout) panelAktifasi.getLayout();
+          // hide first 
+        hideCheckboxInternet(true);
+        
+        new Iconifier(this);
+        
         if (!act.isActivated()) {
             lockButtons(true);
         } else {
             lockButtons(false);
         }
     }
-
+    
     public void lockButtons(boolean b) {
         
-            buttonAktifasi.setEnabled(b);
-            buttonLoket.setEnabled(!b);
-            buttonServer.setEnabled(!b);
+        buttonAktifasi.setEnabled(b);
+        buttonLoket.setEnabled(!b);
+        buttonServer.setEnabled(!b);
         
     }
 
@@ -45,16 +62,22 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        panelFirst = new javax.swing.JPanel();
         buttonServer = new javax.swing.JButton();
         buttonLoket = new javax.swing.JButton();
+        panelAktifasi = new javax.swing.JPanel();
+        checkBoxNoInternet = new javax.swing.JCheckBox();
         buttonAktifasi = new javax.swing.JButton();
+        buttonPenyetelan = new javax.swing.JButton();
+        buttonTicketing = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistem Antrian - MAIN FRAME");
+        setPreferredSize(new java.awt.Dimension(500, 475));
+        getContentPane().setLayout(new java.awt.CardLayout());
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("JALANKAN PROGRAM"));
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 20));
+        panelFirst.setBorder(javax.swing.BorderFactory.createTitledBorder("JALANKAN PROGRAM"));
+        panelFirst.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 20));
 
         buttonServer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         buttonServer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistem/antrian/images/server.png"))); // NOI18N
@@ -63,7 +86,12 @@ public class MainFrame extends javax.swing.JFrame {
         buttonServer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonServer.setPreferredSize(new java.awt.Dimension(200, 100));
         buttonServer.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jPanel1.add(buttonServer);
+        buttonServer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonServerActionPerformed(evt);
+            }
+        });
+        panelFirst.add(buttonServer);
 
         buttonLoket.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         buttonLoket.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistem/antrian/images/client.png"))); // NOI18N
@@ -72,7 +100,24 @@ public class MainFrame extends javax.swing.JFrame {
         buttonLoket.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonLoket.setPreferredSize(new java.awt.Dimension(200, 100));
         buttonLoket.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jPanel1.add(buttonLoket);
+        buttonLoket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonLoketActionPerformed(evt);
+            }
+        });
+        panelFirst.add(buttonLoket);
+
+        panelAktifasi.setPreferredSize(new java.awt.Dimension(200, 100));
+        panelAktifasi.setLayout(new java.awt.CardLayout());
+
+        checkBoxNoInternet.setText("Tidak Pakai Internet");
+        checkBoxNoInternet.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        checkBoxNoInternet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkBoxNoInternetActionPerformed(evt);
+            }
+        });
+        panelAktifasi.add(checkBoxNoInternet, "checkboxNoInternet");
 
         buttonAktifasi.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         buttonAktifasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistem/antrian/images/key.png"))); // NOI18N
@@ -85,23 +130,111 @@ public class MainFrame extends javax.swing.JFrame {
                 buttonAktifasiActionPerformed(evt);
             }
         });
-        jPanel1.add(buttonAktifasi);
+        panelAktifasi.add(buttonAktifasi, "buttonAktifasi");
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        panelFirst.add(panelAktifasi);
+
+        buttonPenyetelan.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        buttonPenyetelan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistem/antrian/images/settings.png"))); // NOI18N
+        buttonPenyetelan.setText("Penyetelan");
+        buttonPenyetelan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonPenyetelan.setPreferredSize(new java.awt.Dimension(200, 100));
+        buttonPenyetelan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonPenyetelan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPenyetelanActionPerformed(evt);
+            }
+        });
+        panelFirst.add(buttonPenyetelan);
+
+        buttonTicketing.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        buttonTicketing.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistem/antrian/images/ticket.png"))); // NOI18N
+        buttonTicketing.setText("Ticket");
+        buttonTicketing.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonTicketing.setPreferredSize(new java.awt.Dimension(200, 100));
+        buttonTicketing.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        buttonTicketing.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTicketingActionPerformed(evt);
+            }
+        });
+        panelFirst.add(buttonTicketing);
+
+        getContentPane().add(panelFirst, "card2");
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonAktifasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAktifasiActionPerformed
-
-        if (act.isActivated()) {
-            act.message(Keys.Notification.SUCCESS);
+        
+        if ((evt.getModifiers() & InputEvent.SHIFT_MASK) != 0) {
+            hideCheckboxInternet(false);
         } else {
-            act.request();
+            
+            if (act.isActivated()) {
+                //act.message(Keys.Notification.SUCCESS);
+            } else {
+                if (checkBoxNoInternet.isSelected()) {
+                    act.setMode(Activator.Mode.OFFLINE);
+                }
+                act.request();
+            }
         }
 
     }//GEN-LAST:event_buttonAktifasiActionPerformed
+
+    private void buttonServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonServerActionPerformed
+        
+        if (svFrame != null) {
+            svFrame.show();
+        } else {
+            svFrame = new ServerFrame();
+            svFrame.setVisible(true);
+        }
+
+    }//GEN-LAST:event_buttonServerActionPerformed
+
+    private void buttonLoketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoketActionPerformed
+        
+        if (clFrame != null) {
+            clFrame.show();
+        } else {
+            clFrame = new ClientFrame();
+            clFrame.setVisible(true);
+        }
+
+    }//GEN-LAST:event_buttonLoketActionPerformed
+
+    private void buttonPenyetelanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPenyetelanActionPerformed
+        
+        if (stFrame != null) {
+            stFrame.show();
+        } else {
+            stFrame = new SettingsFrame();
+            stFrame.setVisible(true);
+        }
+
+    }//GEN-LAST:event_buttonPenyetelanActionPerformed
+
+    private void buttonTicketingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTicketingActionPerformed
+        
+     
+            tFrame = new TicketFrame();
+            tFrame.setVisible(true);
+       
+    }//GEN-LAST:event_buttonTicketingActionPerformed
+
+    private void checkBoxNoInternetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxNoInternetActionPerformed
+        
+        hideCheckboxInternet(true);
+        
+    }//GEN-LAST:event_checkBoxNoInternetActionPerformed
+    
+    TicketFrame tFrame;
+    SettingsFrame stFrame;
+    ClientFrame clFrame;
+    ServerFrame svFrame;
 
     /**
      * @param args the command line arguments
@@ -141,7 +274,11 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAktifasi;
     private javax.swing.JButton buttonLoket;
+    private javax.swing.JButton buttonPenyetelan;
     private javax.swing.JButton buttonServer;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton buttonTicketing;
+    private javax.swing.JCheckBox checkBoxNoInternet;
+    private javax.swing.JPanel panelAktifasi;
+    private javax.swing.JPanel panelFirst;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,10 +8,12 @@ public class DataCache {
 
     private String companyName;
     private int clientNumberOrder;
+    private String usedAlphabet[];
 
-    public DataCache(String cname, int number){
+    public DataCache(String cname, int number, String[] alphabets){
         companyName = cname;
         clientNumberOrder = number;
+        usedAlphabet = alphabets;
     }
     
     /**
@@ -40,6 +42,20 @@ public class DataCache {
      */
     public void setClientNumberOrder(int clientNumberOrder) {
         this.clientNumberOrder = clientNumberOrder;
+    }
+
+    /**
+     * @return the usedAlphabet
+     */
+    public String[] getUsedAlphabet() {
+        return usedAlphabet;
+    }
+
+    /**
+     * @param usedAlphabet the usedAlphabet to set
+     */
+    public void setUsedAlphabet(String[] usedAlphabet) {
+        this.usedAlphabet = usedAlphabet;
     }
     
     
